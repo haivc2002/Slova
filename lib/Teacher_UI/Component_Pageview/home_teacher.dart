@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tt3/Teacher_UI/Editprofile.dart';
-import 'package:tt3/Theme/Color.dart';
+import 'package:tt3/Teacher_UI/edit_profile_teacher.dart';
+import 'package:tt3/Theme/theme_color.dart';
+
+import '../Auth/login_screen.dart';
 
 class HomeTeacher extends StatefulWidget {
   const HomeTeacher({Key? key}) : super(key: key);
@@ -14,6 +16,35 @@ class _HomeTeacherState extends State<HomeTeacher> {
 
   int _currentIndex = 0;
   final PageController _pageController = PageController();
+
+  final List<Map<String, String>> subjects = [
+    {
+      'row': '6',
+      'col': '5',
+      'data': 'Lớp 12A2',
+    },
+    {
+      'row': '5',
+      'col': '1',
+      'data': 'Lớp 12A2',
+    },
+    {
+      'row': '0',
+      'col': '0',
+      'data': 'Lớp 12A2',
+    },
+    {
+      'row': '1',
+      'col': '0',
+      'data': 'Lớp 12A2',
+    },
+    {
+      'row': '0',
+      'col': '1',
+      'data': 'Lớp 12A2',
+    },
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +61,42 @@ class _HomeTeacherState extends State<HomeTeacher> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Quản lý lớp học', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-              gridviewdemo('https://hawaii.edu.vn/wp-content/uploads/2020/07/3647051-1.jpg', 'Quản lý'),
-              const Text('Thông tin nhà trường', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-              gridviewdemo('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTZ63p2YqmE5jy6tP5xEYEit7SrmRIjEydbhqPvWF35TvOIvZ4-', 'thông tin'),
-            ],
-          ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Quản lý lớp học', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                  gridviewdemo('https://hawaii.edu.vn/wp-content/uploads/2020/07/3647051-1.jpg', 'Quản lý'),
+                  const Text('Thông tin nhà trường', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                  gridviewdemo('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTZ63p2YqmE5jy6tP5xEYEit7SrmRIjEydbhqPvWF35TvOIvZ4-', 'thông tin'),
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Thời khóa biểu', style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),),
+                    Text('Tuần này bạn có ${subjects.length} tiết dạy')
+                  ],
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width*2,
+                child: schedule(),
+              ),
+            )
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -56,33 +112,23 @@ class _HomeTeacherState extends State<HomeTeacher> {
         unselectedItemColor: Colors.grey,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet_rounded),
-            label: 'Order',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Order',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.messenger_outline),
-            label: 'Order',
-          ),
+        items: [
+          itemBottom(Icons.home),
+          itemBottom(Icons.calendar_month),
+          itemBottom(Icons.account_balance_wallet_rounded),
+          itemBottom(Icons.notifications),
+          itemBottom(Icons.messenger_outline),
         ],
       ),
     );
   }
 
-
+  BottomNavigationBarItem itemBottom(IconData icon) {
+    return BottomNavigationBarItem(
+      icon: Icon(icon),
+      label: '',
+    );
+  }
 
   Widget gridviewdemo(String url, String textdata) {
     return GridView.builder(
@@ -163,7 +209,7 @@ class _HomeTeacherState extends State<HomeTeacher> {
           onTap: () {
             Navigator.pop(context);
             Navigator.push(context, 
-              CupertinoPageRoute(builder: (context) => const Editprofile())
+              CupertinoPageRoute(builder: (context) => const EditProfile())
             );
           },
           trailing: const Text('Chỉnh sửa', style: TextStyle(color: ColorPalette.oragerColor),),
@@ -187,11 +233,11 @@ class _HomeTeacherState extends State<HomeTeacher> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Cài đặt'),
-              listSetting('Hỗ trợ'),
-              listSetting('Đổi mật khẩu'),
-              listSetting('Chính sách bảo mật'),
-              listSetting('Điều khoản sử dụng'),
-              listSetting('Đăng xuất'),
+              listSetting('Hỗ trợ', null),
+              listSetting('Đổi mật khẩu', null),
+              listSetting('Chính sách bảo mật', null),
+              listSetting('Điều khoản sử dụng', null),
+              listSetting('Đăng xuất', const Login()),
             ],
           ),
         )
@@ -199,15 +245,20 @@ class _HomeTeacherState extends State<HomeTeacher> {
     );
   }
 
-  Widget listSetting(String nameSetting) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Text(nameSetting, style: const TextStyle(fontWeight: FontWeight.w600),),
-          const Spacer(),
-          const Icon(Icons.arrow_forward_ios, size: 16,)
-        ],
+  Widget listSetting(String nameSetting, Widget ? destination) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, CupertinoPageRoute(builder: (context) => destination!));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          children: [
+            Text(nameSetting, style: const TextStyle(fontWeight: FontWeight.w600),),
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios, size: 16,)
+          ],
+        ),
       ),
     );
   }
@@ -231,4 +282,72 @@ class _HomeTeacherState extends State<HomeTeacher> {
       ),
     );
   }
+
+  Widget schedule() {
+    int row = 7;
+    int col = 10;
+    bool manage = true;
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 50,
+          width: MediaQuery.of(context).size.width*2,
+          child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: row,
+            itemBuilder: (context, index) {
+              double cellWidth = MediaQuery.of(context).size.width*2 / row;
+              if(index == 6) {
+                manage = false;
+              }
+              return SizedBox(
+                height: 50,
+                width: cellWidth,
+                child: Center(
+                  child: Text(manage ? 'thứ ${index+2}' : 'chủ nhật'),
+                ),
+              );
+            },
+          ),
+        ),
+        GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 7,
+            childAspectRatio: 2 / 1,
+          ),
+          itemCount: col * row,
+          itemBuilder: (context, index) {
+            int rowIndex = index % row;
+            int colIndex = index ~/ row;
+
+            String? cellData = getCellData(rowIndex.toString(), colIndex.toString());
+
+            return Padding(
+              padding: const EdgeInsets.all(0.5),
+              child: Container(
+                color: cellData != null ? ColorPalette.oragerColor : Colors.white,
+                child: Center(
+                  child: Text('$cellData \n Tiết ${colIndex+1}' ?? '', style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  String? getCellData(String row, String col) {
+    Map<String, String>? cellData = subjects.firstWhere(
+          (data) => data['row'] == row && data['col'] == col,
+      orElse: () => Map<String, String>.from({}),
+    );
+
+    return cellData != null ? cellData['data'] : null;
+  }
+
 }

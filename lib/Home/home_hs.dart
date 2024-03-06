@@ -5,7 +5,7 @@ import 'package:tt3/Home/Chuyencan.dart';
 import 'package:tt3/Home/profile.dart';
 import 'package:tt3/Notification/Thongbao.dart';
 
-import '../ Model/itemModel.dart';
+import '../ Model/item_model.dart';
 import '../Theme/Color.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -44,18 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   width: MediaQuery.of(context).size.width*0.8,
                   margin: const EdgeInsets.symmetric(vertical: 18),
-                  child: Row(
+                  child: const Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Môn học'),
                           Text('Năm nay có 12 bạn học môn')
                         ],
                       ),
-                      Expanded(child: Container()),
-                      const Text('Xem tất cả', style: TextStyle(color: ColorPalette.oragerColor),)
+                      Spacer(),
+                      Text('Xem tất cả', style: TextStyle(color: ColorPalette.oragerColor),)
                     ],
                   ),
                 ),
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 5,
                 ),
               ),
-              Expanded(child: Container()),
+              const Spacer(),
             ],
           ),
         ),
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Expanded(child: Container()),
+              const Spacer(),
               Container(
                 height: MediaQuery.of(context).size.height*0.18,
                 width: MediaQuery.of(context).size.width*0.8,

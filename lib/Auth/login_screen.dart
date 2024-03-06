@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tt3/Home/home.dart';
 
-import '../ Model/itemModel.dart';
+import '../ Model/item_model.dart';
 import '../Teacher_UI/HomeTeacher.dart';
 import '../Theme/Color.dart';
 

@@ -5,7 +5,7 @@ import 'package:tt3/Home/WidgetAppbar.dart';
 import 'package:tt3/Theme/Color.dart';
 import 'package:intl/intl.dart';
 
-import '../ Model/itemModel.dart';
+import '../ Model/item_model.dart';
 
 class Chuyencan extends StatefulWidget {
   const Chuyencan({Key? key}) : super(key: key);
@@ -38,6 +38,38 @@ class _ChuyencanState extends State<Chuyencan> {
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('dd/MM/yyyy').format(now);
+
+
+
+    final List<Map<String, String>> subjects = [
+      {
+        'name': 'Toán học',
+        'teacher': 'Nguyễn Văn A',
+      },
+      {
+        'name': 'Văn học',
+        'teacher': 'Trần Thị B',
+      },
+      {
+        'name': 'Tiếng Anh',
+        'teacher': 'Lê Văn C',
+      },
+    ];
+
+    final List<Map<String, String>> classrooms = [
+      {
+        'name': 'A1',
+        'capacity': '30',
+      },
+      {
+        'name': 'A2',
+        'capacity': '35',
+      },
+      {
+        'name': 'A3',
+        'capacity': '40',
+      },
+    ];
 
     return Scaffold(
       backgroundColor: ColorPalette.backgroudApp,
@@ -80,7 +112,7 @@ class _ChuyencanState extends State<Chuyencan> {
                         ),
                       ],
                     ),
-                    Expanded(child: Container()),
+                    const Spacer(),
                     Container(
                       height: 30,
                       width: 100,
@@ -109,6 +141,46 @@ class _ChuyencanState extends State<Chuyencan> {
               ),
               child: expan(),
             ),
+
+
+            // ListView(
+            //   shrinkWrap: true,
+            //   children: <Widget>[
+            //     // Danh sách các môn học
+            //     for (var subject in subjects)
+            //       Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           ListTile(
+            //             title: Text(subject['name']!),
+            //             subtitle: Text(subject['teacher']!),
+            //           ),
+            //           DataTable(
+            //             columns: <DataColumn>[
+            //               DataColumn(label: Text('Thứ')),
+            //               DataColumn(label: Text('Tiết')),
+            //               DataColumn(label: Text('Phòng học')),
+            //             ],
+            //             rows: <DataRow>[
+            //               for (var lesson in (subject['lessons'] as List<Map<String, String>>?) ?? [])
+            //                 DataRow(cells: <DataCell>[
+            //                   DataCell(Text(lesson['day']!)),
+            //                   DataCell(Text(lesson['time']!)),
+            //                   DataCell(Text(lesson['classroom']!)),
+            //                 ]),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     // Danh sách các lớp học
+            //     for (var classroom in classrooms)
+            //       ListTile(
+            //         title: Text(classroom['name']!),
+            //         subtitle: Text('${classroom['capacity']} học sinh'),
+            //       ),
+            //   ],
+            // )
+
           ],
         ),
       ),
@@ -205,11 +277,11 @@ class _ChuyencanState extends State<Chuyencan> {
             },
             children: [
               ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: dayy.length,
                 itemBuilder: (context, index) {
                   Color themeStatus = Colors.green;
-
                   if (dayy[index].status == 'Muộn giờ') {
                     themeStatus = Colors.orange;
                   }
@@ -273,6 +345,7 @@ class _ChuyencanState extends State<Chuyencan> {
             },
             children: [
               ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: dayy2.length,
                 itemBuilder: (context, index) {
@@ -317,4 +390,5 @@ class _ChuyencanState extends State<Chuyencan> {
       ],
     );
   }
+
 }

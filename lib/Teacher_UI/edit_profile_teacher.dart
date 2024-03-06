@@ -49,10 +49,10 @@ class _EditprofileState extends State<Editprofile> {
                           height: 100,
                           child: Column(
                             children: [
-                              Expanded(child: Container()),
+                              const Spacer(),
                               Row(
                                 children: [
-                                  Expanded(child: Container()),
+                                  const Spacer(),
                                   Container(
                                     height: 40,
                                     width: 40,
