@@ -7,11 +7,11 @@ class ItemModel {
   ItemModel({this.name, this.url});
 }
 
-class ItemModelday {
+class ItemModelDay {
   String? day;
   String? status;
 
-  ItemModelday({this.day, this.status});
+  ItemModelDay({this.day, this.status});
 }
 
 class ItemModelUser {
