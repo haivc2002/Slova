@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tt3/Home/home.dart';
-
-import '../ Model/item_model.dart';
-import '../Teacher_UI/HomeTeacher.dart';
-import '../Theme/Color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tt3/Home/home_hs.dart';
+import 'package:tt3/Teacher_UI/Component_Pageview/synthetic.dart';
+import '../Theme/theme_color.dart';
+import '../model/item_model.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -32,9 +32,14 @@ class _LoginState extends State<Login> {
             CupertinoPageRoute(builder: (context) => const HomeScreen()),
           );
         } else if (user.quyen == 0) {
-          Navigator.pushReplacement(
+          // Navigator.push(
+          //   context,
+          //   CupertinoPageRoute(builder: (context) => const Synthetic()),
+          // );
+
+          Navigator.pushNamed(
             context,
-            CupertinoPageRoute(builder: (context) => const HomeTeacher()),
+            '/synthetic',
           );
         }
         return;
@@ -42,7 +47,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  TextEditingController textcontroller = TextEditingController();
+  TextEditingController textcontroller = TextEditingController(text: 'testemail2');
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +65,10 @@ class _LoginState extends State<Login> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
+                Center(
                   child: Text(
                     'Đăng nhập',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 40.sp, fontWeight: FontWeight.w500),
                   ),
                 ),
                 forminput('Email hoặc số điện thoại', 'Nhập email hoặc số điện thoại', Icons.person),
@@ -105,7 +110,6 @@ class _LoginState extends State<Login> {
                   child: Material(
                     borderRadius: BorderRadius.circular(6),
                     color: textcontroller.text.isNotEmpty ? ColorPalette.oragerColor : Colors.grey.withOpacity(0.3),
-                    // color: textcontroller.text.isNotEmpty ? const Color(0xFFF88125) : Colors.grey.withOpacity(0.3),
                     child: InkWell(
                       onTap: () {
                         // Navigator.push(context,

@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tt3/Home/widget_appbar.dart';
 import 'package:tt3/Theme/theme_color.dart';
-
-import '../../ Model/item_model.dart';
+import '../model/item_model.dart';
 
 class ListHS extends StatefulWidget {
   const ListHS({Key? key}) : super(key: key);
